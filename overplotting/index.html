@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Volumn Dataset</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="Gang Tao">
+		<script type="text/javascript" src="libs/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="libs/d3.v3.min.js"></script>
+		<script type="text/javascript" src="libs/json2.js"></script>
+		<script type="text/javascript" src="libs/jslinq.js"></script>
+		
+		<script type="text/javascript" src="nationData.js"></script>
+		<script type="text/javascript" src="src/main.js"></script>
+
+		<style type="text/css">
+			body {
+				font: 10px sans-serif;
+			}
+
+			.axis path, .axis line {
+				fill: none;
+				stroke: #000;
+				shape-rendering: crispEdges;
+			}
+
+			.dot {
+				stroke: #000;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			data range :
+			<input id="slider" type="range" min="100" max="500" step="10" />
+			<div id="dataNumber">
+				Loading ...
+			</div>
+			heat granularity :
+			<input id="heatgr" type="text" name="grid" value="30">
+			<input id="hideGrid" type="checkbox" name="hideGrid" value="true">
+			Hide Grid
+			<input id="hideNumber" type="checkbox" name="hideNumber" value="true">
+			Hide Number
+			<br>
+			original loading time: <label id="t0">NA</label>
+			aggregation time: <label id="t1">NA</label>
+			appending to doc time: <label id="t2">NA</label>
+		</div>
+		<script type='text/javascript'>
+		</script>
+	</body>
+</html>

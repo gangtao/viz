@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Bitmap to Data</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="Gang Tao">
+		<script type="text/javascript" src="../../libs/d3.v2.js"></script>
+		<script type="text/javascript" src="../../libs/jquery.js"></script>
+		<script type="text/javascript" src="../../libs/json2.js"></script>
+		<script type="text/javascript" src="../../libs/sap.viz.js"></script>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+		<canvas id="drawing"  width="200" height="100" ></canvas>
+		<script type='text/javascript'>
+			window.onload = function() {
+				var canvas = document.getElementById("drawing");
+				// grabs the canvas element
+				var context = canvas.getContext("2d");
+				// returns the 2d context object
+				var img = new Image()//creates a variable for a new image
+				img.src = "resources/mons.jpg"// specifies the location of the image
+				img.onload = function() {
+					console.log(this.width + ":" + this.height);
+					canvas.width = this.width;
+					canvas.height = this.height;
+					// draws the image at the specified x and y location
+					context.drawImage(img, 0, 0);
+					var strDataURI = canvas.toDataURL();
+					console.log(strDataURI);
+
+					// Get the CanvasPixelArray from the given coordinates and dimensions.
+					var imgd = context.getImageData(0, 0, this.width, this.height);
+					var pix = imgd.data;
+					var result = [], result1 = [];
+					var px = 0, py = 0;
+
+					var resultArray = new Array(this.width);
+					for (var i = 0; i < this.width; i++) {
+						resultArray[i] = new Array(this.height);
+					}
+
+					// Loop over each pixel and invert the color.
+					for (var i = 0, n = pix.length; i < n; i += 4) {
+						var o = {};
+						o.index = i;
+						o.x = px++;
+						o.y = this.height - py - 1;
+						o.r = pix[i];
+						o.g = pix[i + 1];
+						o.b = pix[i + 2];
+						result.push(o);
+						resultArray[o.x][o.y] = o;
+						if (px === this.width) {
+							px = 0;
+							py = py + 1;
+						}
+					}
+
+					// Draw the ImageData at the given (x,y) coordinates.
+					//context.putImageData(imgd, x, y);
+					//console.log(JSON.stringify(result));
+
+					for (var i = 0; i < this.width; i++) {
+						for (var j = 0; j < this.height; j++) {
+							result1.push(resultArray[i][j]);
+						}
+					}
+
+					console.log(JSON.stringify(result1));
+				};
+			}
+		</script>
+	</body>
+</html>
