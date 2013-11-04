@@ -1,0 +1,45 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Visual Attributes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="libs/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="libs/d3.v3.min.js"></script>
+	<script type="text/javascript" src="libs/json2.js"></script>
+	<style type="text/css">
+		body {
+			background-color:#fff;
+		}
+		.title {
+			font-family: arial, sans-serif;
+			font-size:20;
+		}
+	</style>
+		
+	</head>
+
+	<body>
+		<div id="chart" style="background-color:#fff;">
+		</div>
+	</body>
+	<script type="text/javascript">
+		var w = 600, h = 300;
+		var root = d3.select("#chart").append("svg").attr("width", w).attr("height", h);
+		var grad = root.append("defs").append("linearGradient")
+					.attr("id", "grad1")
+					.attr("x1", "0%")
+					.attr("y1", "0%")
+					.attr("x2", "100%")
+					.attr("y2", "0%");
+
+		grad.append("stop").attr("offset", "0%").style("stop-color", "#000").style("stop-opacity", 1);
+		grad.append("stop").attr("offset", "100%").style("stop-color", "#000").style("stop-opacity", 0.2);
+		root.append("rect").attr("x",10).attr("y",10).attr("width",500).attr("height",150).attr("fill", "url(#grad1)");;
+
+		for (var i = 0; i < 5 ; i ++ ) {
+			root.append("rect").attr("x",30 + 100*i ).attr("y",50).attr("width",50).attr("height",50).attr("fill", "#888");;
+
+		}
+	</script>
+</html>
